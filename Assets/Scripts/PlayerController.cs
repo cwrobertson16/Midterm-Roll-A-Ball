@@ -8,15 +8,14 @@ public class PlayerController : MonoBehaviour {
 	public Text countText;
 
 
-
 	private Rigidbody rb;
-	private int count;
-	private float timeLeft = 3f;
+	private int count; //what we need to reference for high scores
+
 
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
-		count = 0;
+		count = 0; //initial score
 		SetCountText ();
 	}
 
@@ -30,10 +29,8 @@ public class PlayerController : MonoBehaviour {
 		rb.AddForce (movement * speed);
 
 
-		//makes ball jump into air when space bar is pressed
-
 		if (Input.GetButtonDown("Jump")) {
-			GetComponent<Rigidbody>().AddForce(new Vector3(0, 3, 0),ForceMode.Impulse);
+			GetComponent<Rigidbody>().AddForce(new Vector3(0, 3, 0),ForceMode.Impulse); //Make ball jump into the air when the space bar is pressed
 		}
 
 	}
@@ -42,15 +39,16 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag ("Pick Up"))
 		{
-			other.gameObject.SetActive (false);
-			count = count + 1;
+			other.gameObject.SetActive (false); //remove pickup from field after being picked up
+			count = count + 1; //add 1 when each pickup is picked up
 			SetCountText ();
 		}
+
 	}
 
 	void SetCountText ()
 	{
-		countText.text = "Count: " + count.ToString ();
+		countText.text = "Count: " + count.ToString (); //update count tex to show how many pickups have been collected
 
 	}
 }
