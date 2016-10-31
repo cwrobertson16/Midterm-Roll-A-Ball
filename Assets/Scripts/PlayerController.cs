@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 
 
 		if (Input.GetButtonDown("Jump")) {
-			GetComponent<Rigidbody>().AddForce(new Vector3(0, 3, 0),ForceMode.Impulse); //Make ball jump into the air when the space bar is pressed
+			GetComponent<Rigidbody>().AddForce(new Vector3(0, 6, 0),ForceMode.Impulse); //Make ball jump into the air when the space bar is pressed
 		}
 
 	}
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour {
 
 	void SetCountText ()
 	{
-		countText.text = "Count: " + count.ToString (); //update count tex to show how many pickups have been collected
+		countText.text = "Count: " + count.ToString (); //update count text to show how many pickups have been collected
 
 	}
 }

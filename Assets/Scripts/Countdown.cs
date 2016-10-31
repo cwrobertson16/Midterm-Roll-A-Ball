@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement; //Allow ability to load game over scene
 public class Countdown : MonoBehaviour {
 
 
+	public GameObject Player;
 	public float myTimer = 30;  //Amount of time that player has
 	public Text timerText;
-	public float resetDelay = 0f;
+	bool TimeUp;
 
 
 
@@ -16,6 +17,8 @@ public class Countdown : MonoBehaviour {
 	void Start () {
 
 		timerText = GetComponent<Text>(); //grab text component to edit
+
+		TimeUp = false;
 	
 	}
 	
@@ -26,15 +29,14 @@ public class Countdown : MonoBehaviour {
 		timerText.text = myTimer.ToString ("f2"); //make text component show current time left. "f2" used to make it control amount of decimals shown in time
 
 		if (myTimer <= 0) {
-			Invoke ("Reset", resetDelay);	//Go to menu when time runs out
+			TimeUp = true;
+			myTimer = 0;
+			timerText.text = myTimer.ToString ("f0"); //stop timer from continuing into the negatives
+			Player.SetActive (false); //Turns off the player's ball so they will stop collecting the pickups
 		}
 	
 	}
 
-	void Reset (){
-		Time.timeScale = 0f;
-		SceneManager.LoadScene ("GameOver");
-	}
 }
 
 //help from video: https://www.youtube.com/watch?v=D-6BbUozuCY
